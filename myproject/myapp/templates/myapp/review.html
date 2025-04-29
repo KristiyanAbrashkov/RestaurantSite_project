@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>REVIEW</h1>
+
+<div>
+    <div>
+        {% for review in review %}
+        <div>
+            <h5>{{review.id}} -> {{review.name}}</h5>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
