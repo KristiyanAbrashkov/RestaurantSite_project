@@ -5,9 +5,13 @@
 <h1>REVIEWS</h1>
 
 <div>
+    <a href="{% url 'create-review' %}">Create Review</a>
+    <hr>
     <div>
         {% for review in review %}
         <div>
+            <a href="{% url 'update-review' review.id %}">Edit</a>
+            <a href="{% url 'delete-review' review.id%}">Delete</a>
             <span>@{{ review.author.username }}</span>
             <h5>{{ review.main_review }}</h5>
             <p>{{ review.description }}</p>
