@@ -10,8 +10,10 @@
     <div>
         {% for review in review %}
         <div>
+            {% if request.user == review.author %}
             <a href="{% url 'update-review' review.id %}">Edit</a>
             <a href="{% url 'delete-review' review.id%}">Delete</a>
+            {% endif %}
             <span>@{{ review.author.username }}</span>
             <h5>{{ review.main_review }}</h5>
             <p>{{ review.description }}</p>
