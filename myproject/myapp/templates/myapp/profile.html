@@ -8,7 +8,8 @@
         <li>
             <strong>{{ review.main_review }}</strong><br>
             {{ review.description }}<br>
-            <small>{{ review.created }}</small>
+            <small>Created: {{ review.created }}</small>
+            <small>Last Updated: {{ review.updated }}</small>
         </li>  
     {% endfor %}
 </ul>
