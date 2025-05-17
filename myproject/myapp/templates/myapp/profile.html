@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>{{user.username}}</h1>
+<h2>Reviews:</h2>
+<ul>
+    {% for review in reviews %}
+        <li>
+            <strong>{{ review.main_review }}</strong><br>
+            {{ review.description }}<br>
+            <small>{{ review.created }}</small>
+        </li>  
+    {% endfor %}
+</ul>
+
+{% endblock content %}

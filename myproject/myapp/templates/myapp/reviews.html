@@ -14,7 +14,7 @@
             <a href="{% url 'update-review' review.id %}">Edit</a>
             <a href="{% url 'delete-review' review.id%}">Delete</a>
             {% endif %}
-            <span>@{{ review.author.username }}</span>
+            <a href="{% url 'user-profile' review.author.id %}">@{{ review.author.username }}</a>
             <h5>{{ review.main_review }}</h5>
             <p>{{ review.description }}</p>
         </div>

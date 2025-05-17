@@ -63,6 +63,12 @@ def reviews(request):
 def home(request):
     return render(request, 'myapp/home.html')
 
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    reviews = user.review_set.all()
+    context = {'user':user, 'reviews':reviews}
+    return render(request, 'myapp/profile.html', context)
+
 @login_required(login_url = 'login')
 def createReview(request):
     form = ReviewForm()
