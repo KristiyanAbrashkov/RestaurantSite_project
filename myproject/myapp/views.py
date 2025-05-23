@@ -76,7 +76,9 @@ def createReview(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid:
-            form.save()
+            review = form.save(commit=False)
+            review.author = request.user
+            review.save()
             return redirect('reviews')
 
     context = {'form':form}
