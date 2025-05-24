@@ -2,6 +2,23 @@
 
 {% block content %}
 <h1>{{user.username}}</h1>
+<div >
+    {% if profile.image %}
+        <img src="{{ profile.image.url }}" alt="Profile Picture">
+    {% else %}
+        <p>No profile picture.</p>
+    {% endif %}
+
+    <div>
+        <strong>Bio:</strong>
+        {% if profile.bio %}
+            <p>{{ profile.bio }}</p>
+        {% else %}
+            <p>No bio added.</p>
+        {% endif %}
+    </div>
+</div>
+
 <h2>Reviews:</h2>
 <ul>
     {% for review in reviews %}
@@ -13,5 +30,11 @@
         </li>  
     {% endfor %}
 </ul>
+
+{% if request.user == user %}
+<a href="{% url 'edit-profile' %}">
+    <button>Edit</button>
+</a>
+{% endif %}
 
 {% endblock content %}

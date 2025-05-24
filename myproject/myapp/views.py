@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Review
-from .forms import ReviewForm
+from .forms import ReviewForm, UserForm
 
 # Create your views here.
 
@@ -74,13 +74,13 @@ def createReview(request):
     form = ReviewForm()
 
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
-        if form.is_valid:
-            review = form.save(commit=False)
-            review.author = request.user
-            review.save()
-            return redirect('reviews')
-
+        Review.objects.create(
+        author = request.user,
+        main_review = request.POST.get('main_review'),
+        description = request.POST.get('description'),
+        )
+        return redirect('reviews')
+    
     context = {'form':form}
     return render(request, 'myapp/review_form.html', context)
 
@@ -111,3 +111,15 @@ def deleteReview(request, pk):
         review.delete()
         return redirect('reviews')
     return render(request, 'myapp/delete.html', {'obj': review})
+
+@login_required(login_url = 'login')
+def updateProfile(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == 'POST':
+        form = UserForm(request.POST,instance=user)
+        if form.is_valid:
+            form.save()
+            return redirect('user-profile', pk=user.id)
+    return render(request, 'myapp/edit_profile.html', {'form':form})
