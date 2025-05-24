@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Review
-from .forms import ReviewForm, UserForm
+from .forms import ReviewForm, UserForm, CustomUserCreationForm
 
 # Create your views here.
 
@@ -41,10 +41,10 @@ def logoutUser(request):
     return redirect('home')
 
 def registerUser(request):
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
