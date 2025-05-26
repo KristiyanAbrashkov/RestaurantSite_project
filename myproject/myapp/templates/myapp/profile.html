@@ -2,22 +2,6 @@
 
 {% block content %}
 <h1>{{user.username}}</h1>
-<div >
-    {% if profile.image %}
-        <img src="{{ profile.image.url }}" alt="Profile Picture">
-    {% else %}
-        <p>No profile picture.</p>
-    {% endif %}
-
-    <div>
-        <strong>Bio:</strong>
-        {% if profile.bio %}
-            <p>{{ profile.bio }}</p>
-        {% else %}
-            <p>No bio added.</p>
-        {% endif %}
-    </div>
-</div>
 
 <h2>Reviews:</h2>
 <ul>

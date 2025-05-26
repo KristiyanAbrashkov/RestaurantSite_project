@@ -28,6 +28,28 @@ def getReview(request, pk):
     serializer = ReviewSerializer(review, many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def createReview(request):
+    serializer = ReviewSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    
+@api_view(['PUT'])
+def updateReview(request, pk):
+    review = Review.objects.get(id=pk)
+    serializer = ReviewSerializer(instance=review, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteReview(request, pk):
+    review = Review.objects.get(id=pk)
+    review.delete()
+    return Response('Review deleted successfully')
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def getUserProfile(request):
