@@ -1,24 +1,43 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>{{user.username}}</h1>
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <h2>{{ user.username }}</h2>
 
-<h2>Reviews:</h2>
-<ul>
-    {% for review in reviews %}
-        <li>
-            <strong>{{ review.main_review }}</strong><br>
-            {{ review.description }}<br>
-            <small>Created: {{ review.created }}</small>
-            <small>Last Updated: {{ review.updated }}</small>
-        </li>  
-    {% endfor %}
-</ul>
+      {% if request.user == user %}
+        <a href="{% url 'edit-profile' %}" class="btn btn-primary mb-3">Edit</a>
+      {% endif %}
+    </div>
 
-{% if request.user == user %}
-<a href="{% url 'edit-profile' %}">
-    <button>Edit</button>
-</a>
-{% endif %}
-
-{% endblock content %}
+    <div class="col-md-8">
+      <h3>Reviews</h3>
+      {% if reviews %}
+        <div class="list-group">
+          {% for review in reviews %}
+            <div class="list-group-item mb-3">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ review.main_review }}</h5>
+                <small>{{ review.updated|date:"d M Y" }}</small>
+              </div>
+              <p class="mb-1">{{ review.description }}</p>
+              <small>Created: {{ review.created|date:"d M Y" }}</small><br>
+              <small>Updated: {{ review.updated|date:"d M Y" }}</small>
+              
+              {% if request.user == review.author %}
+                <div class="mt-2">
+                  <a href="{% url 'update-review' review.id %}" class="btn btn-sm btn-warning">Update</a>
+                  <a href="{% url 'delete-review' review.id %}" class="btn btn-sm btn-danger">Delete</a>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>The user has no reviews.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

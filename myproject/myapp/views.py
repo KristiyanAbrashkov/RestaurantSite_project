@@ -123,3 +123,6 @@ def updateProfile(request):
             form.save()
             return redirect('user-profile', pk=user.id)
     return render(request, 'myapp/edit_profile.html', {'form':form})
+
+def menu(request):
+    return render(request, 'myapp/menu.html')

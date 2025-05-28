@@ -1,26 +1,28 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-<h1>REVIEWS</h1>
-
-<div>
-    <a href="{% url 'create-review' %}">Create Review</a>
-    <hr>
-    <div>
-        {% for review in review %}
-        <div>
-            {% if request.user == review.author %}
-            <a href="{% url 'update-review' review.id %}">Edit</a>
-            <a href="{% url 'delete-review' review.id%}">Delete</a>
+<div class="container my-4">
+  <h2>Reviews</h2>
+  <div class="row">
+    {% for review in review %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ review.main_review }}</h5>
+            {% if review.description %}
+              <p class="card-text">{{ review.description }}</p>
             {% endif %}
-            <a href="{% url 'user-profile' review.author.id %}">@{{ review.author.username }}</a>
-            <h5>{{ review.main_review }}</h5>
-            <p>{{ review.description }}</p>
+            <p>Author: <a href="{% url 'user-profile' review.author.id %}">{{ review.author.username }}</a></p>
+            <div class="mt-auto">
+              <small class="text-muted d-block">Created: {{ review.created|date:"d M Y" }}</small>
+              <small class="text-muted">Updated: {{ review.updated|date:"d M Y" }}</small>
+            </div>
+          </div>
         </div>
-        <hr>
-        {% endfor %}
-    </div>
+      </div>
+    {% empty %}
+      <p>No reviews found.</p>
+    {% endfor %}
+  </div>
 </div>
-
-{% endblock content %}
+{% endblock %}
