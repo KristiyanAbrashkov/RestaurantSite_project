@@ -1,7 +1,7 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}">Restaurant</a>
+    <a class="navbar-brand text-white" href="{% url 'home' %}">Restaurant</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,24 +9,24 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'reviews' %}">Reviews</a>
+          <a class="nav-link text-white" href="{% url 'menu' %}">Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+          <a class="nav-link text-white" href="{% url 'reviews' %}">Reviews</a>
         </li>
       </ul>
 
       <ul class="navbar-nav">
         {% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'user-profile' request.user.id %}">{{ request.user.username }}</a>
+          <a class="nav-link text-white" href="{% url 'user-profile' request.user.id %}">{{ request.user.username }}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">LogOut</a>
+          <a class="nav-link text-white" href="{% url 'logout' %}">LogOut</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">LogIn</a>
+          <a class="nav-link text-white" href="{% url 'login' %}">LogIn</a>
         </li>
         {% endif %}
       </ul>

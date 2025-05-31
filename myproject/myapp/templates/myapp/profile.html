@@ -19,11 +19,10 @@
             <div class="list-group-item mb-3">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{ review.main_review }}</h5>
-                <small>{{ review.updated|date:"d M Y" }}</small>
+                <small>Last Update: {{ review.updated|date:"d M Y" }}</small>
               </div>
               <p class="mb-1">{{ review.description }}</p>
-              <small>Created: {{ review.created|date:"d M Y" }}</small><br>
-              <small>Updated: {{ review.updated|date:"d M Y" }}</small>
+              <small>Created: {{ review.created|date:"d M Y" }}</small>
               
               {% if request.user == review.author %}
                 <div class="mt-2">
